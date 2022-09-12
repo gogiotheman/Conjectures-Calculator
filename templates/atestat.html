@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+.active {
+  background-color: green;
+}
+
+@media screen and (max-width: 600px) {
+  ul.topnav li.right, 
+  ul.topnav li {float: none;}
+}
+
+</style>
+</head>
+<body style="background-color:#ffff99">
+
+    <ul>
+        <li><a href="#cjcollatz" class="active">Conjenctura lui Collatz</a></li>
+        <li><a href="#permult">Persistența multiplicativă</a></li>
+        <li><a href="#cjgoldbach">Conjenctura lui Goldbach</a></li>
+    </ul>
+
+    <div style="padding:0 16px;">
+        <h2 id="cjcollatz">Conjenctura lui Collatz</h2>
+        <p>Pentru un șir de numere naturale construit astfel:</p>
+        <p>x<sub>0</sub>=n</p>
+        <p>x<sub>i+1</sub> se obține din x<sub>i</sub> după următoarea regulă: dacă x<sub>i</sub> e par, atunci x<sub>i+1</sub> este jumătatea lui x<sub>i</sub>; altfel x<sub>i+1</sub> este 3x<sub>i</sub>+1</p>
+        <p>Conjectura lui Collatz afirmă faptul că pentru orice valoare inițială n, șirul x<sub>n</sub> va atinge la un moment dat 1.</p>
+        <p><strong>Conjectura lui Collatz nu a fost încă demonstrată. O demonstrație suficientă ar fi și un contraexemplu, care ar infirma-o.</strong></p>
+        <p><strong><mark>Introduceți mai jos un număr natural pentru a verifica dacă satisface cerințele ipotezei lui Collatz:</mark></strong></p>
+    </div>
+
+    <form action="/collatz/" method="post">
+        {% csrf_token %}
+        Introduceți numărul natural:
+        <input type="number" name="param" required><br><br>
+        {{data}}
+        <br><br>
+        <input type="submit" value="Verifică!">
+    </form>
+    <br><br><br><br>
+
+    <div style="padding:0 16px;">
+        <h2 id="permult">Persistența multiplicativă pentru numere în baza 10</h2>
+        <p>Persistența multiplicativă a unui număr în baza 10 reprezintă numărul de etape necesare atingerii unui număr format dintr-o singură cifră, în urma efectuării înmulțirii cifrelor numărului dat, prin iterații succesive</p>
+        <p>Altfel:</p>
+        <p>
+            Fie x un număr format cu cifrele a<sub>1</sub>, a<sub>2</sub>, a<sub>3</sub>,..., a<sub>n</sub>;<br>
+            x=a<sub>1</sub>a<sub>2</sub>a<sub>3</sub>...a<sub>n</sub>
+        </p>
+        <p>
+            Se înmulțesc cifrele, iar x devine:<br>
+            x=a<sub>1</sub>*a<sub>2</sub>*a<sub>3</sub>*...*a<sub>n</sub>=b<sub>1</sub>b<sub>2</sub>...b<sub>m</sub><br>
+            Apoi:<br>
+            x=b<sub>1</sub>*b<sub>2</sub>*b<sub>3</sub>...*b<sub>m</sub>=c<sub>1</sub>c<sub>2</sub>...c<sub>p</sub><br>
+            Și procesul se repetă până se obține o valoare a lui x formată dintr-o singură cifră.<br>
+            Numărul de efectuări ale înmulțirii cifrelor până la acest rezultat reprezintă <strong>persistența înmulțirii</strong> numărului inițial x=a<sub>1</sub>a<sub>2</sub>a<sub>3</sub>...a<sub>n</sub>
+        </p>
+        <p><strong> În baza 10, se consideră a nu exista un număr cu permisivitatea multiplicării>11. 277777788888899 este cel mai mic număr cu permisivitatea multiplicării=11. În orice caz, dacă acesta există, e demonstrat că el trebuie să fie mai mare decât 10<sup>20585</sup>.</strong></p>
+        <p><strong><mark>Introduceți mai jos un număr mai mare decât 10<sup>20585</sup> și verificați-i permisivitatea multiplicativă! Sau orice număr vreți dumneavoastră, cine sunt eu să vă condiționez libertatea alegerii?!</mark></strong></p>
+    </div>
+    <form action="/persmult/" method="post">
+        {% csrf_token %}
+        Introduceți numărul:
+        <input type="number" name="m" required><br><br>
+        {{data1}}<br>
+        <p>Numărul de înmulțiri={{data2}}</p>
+        <br><br>
+        <input type="submit" value="Verifică!">
+    </form>
+    <br><br><br><br>
+
+    <div style="padding:0 16px;">
+        <h2 id="cjgoldbach">Conjectura lui Goldbach</h2>
+        <p> Conjectura lui Goldbach susține că orice număr par>2 poate fi scris ca sumă de două numere prime</p>
+        <p><strong>A fost arătat că ipoteza este adevărată pentru numerele întregi mai mici decât 4*10<sup>18</sup>, dar rămâne în continuare nedemonstrată, în ciuda eforturilor considerabile</strong></p>
+        <p><strong><mark>Introduceți mai jos un număr pentru a-l descompune în sumă de doua numere prime</mark></strong></p>
+    </div>
+    <form action="/persmult/" method="post">
+    {% csrf_token %}
+    Introduceți numărul:
+    <input type="number" name="paramGoldbach" required><br><br>
+    {{data3}}={{data4}}+{{data5}}<br><br>
+    <input type="submit" value="Verifică!">
+    </form>
+
+
+
+
+</body>
+</html>
